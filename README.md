@@ -1,11 +1,11 @@
-# Very short description of the package
+# List schema details from your database connection
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/ohseesoftware/laravel-schema-list.svg?style=flat-square)](https://packagist.org/packages/ohseesoftware/laravel-schema-list)
-[![Build Status](https://img.shields.io/travis/ohseesoftware/laravel-schema-list/master.svg?style=flat-square)](https://travis-ci.org/ohseesoftware/laravel-schema-list)
-[![Quality Score](https://img.shields.io/scrutinizer/g/ohseesoftware/laravel-schema-list.svg?style=flat-square)](https://scrutinizer-ci.com/g/ohseesoftware/laravel-schema-list)
-[![Total Downloads](https://img.shields.io/packagist/dt/ohseesoftware/laravel-schema-list.svg?style=flat-square)](https://packagist.org/packages/ohseesoftware/laravel-schema-list)
+[![Current Release](https://img.shields.io/github/release/ohseesoftware/laravel-schema-list.svg?style=flat-square)](https://github.com/ohseesoftware/laravel-schema-list/releases)
+![Build Status Badge](https://github.com/ohseesoftware/laravel-schema-list/workflows/Build/badge.svg)
+[![Downloads](https://img.shields.io/packagist/dt/ohseesoftware/laravel-schema-list.svg?style=flat-square)](https://packagist.org/packages/ohseesoftware/laravel-schema-list)
+[![MIT License](https://img.shields.io/github/license/ohseesoftware/laravel-schema-list.svg?style=flat-square)](https://github.com/ohseesoftware/laravel-schema-list/blob/master/LICENSE)
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+Use the command line to easily list out your database's tables and columns for a given table.
 
 ## Installation
 
@@ -17,15 +17,21 @@ composer require ohseesoftware/laravel-schema-list
 
 ## Usage
 
-``` php
-// Usage description here
+List tables from your default connection:
+
+```
+php artisan schema:tables
+```
+
+List columns for a given table:
+
+```
+php artisan schema:columns {table}
 ```
 
 ### Testing
 
-``` bash
-composer test
-```
+No tests right now :)
 
 ### Changelog
 
@@ -41,8 +47,8 @@ If you discover any security related issues, please email owen@ohseemedia.com in
 
 ## Credits
 
-- [Owen Conti](https://github.com/ohseesoftware)
-- [All Contributors](../../contributors)
+-   [Owen Conti](https://github.com/ohseesoftware)
+-   [All Contributors](../../contributors)
 
 ## License
 
