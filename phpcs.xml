@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<ruleset>
+    <description>Oh See Software PHPCS config.</description>
+    <rule ref="PSR2">
+        <exclude name="PSR1.Methods.CamelCapsMethodName"/>
+    </rule>
+</ruleset>
