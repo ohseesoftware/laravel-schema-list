@@ -1,0 +1,54 @@
+{
+    "name": "ohseesoftware/laravel-schema-list",
+    "description": "List tables, columns, and indices for your database connections.",
+    "keywords": [
+        "ohseesoftware",
+        "laravel-schema-list"
+    ],
+    "homepage": "https://github.com/ohseesoftware/laravel-schema-list",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Owen Conti",
+            "email": "owen@ohseemedia.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "illuminate/support": "^6.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4.0",
+        "phpunit/phpunit": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ohseesoftware\\LaravelSchemaList\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ohseesoftware\\LaravelSchemaList\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ohseesoftware\\LaravelSchemaList\\LaravelSchemaListServiceProvider"
+            ],
+            "aliases": {
+                "LaravelSchemaList": "Ohseesoftware\\LaravelSchemaList\\LaravelSchemaListFacade"
+            }
+        }
+    }
+}
