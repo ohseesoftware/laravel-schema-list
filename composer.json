@@ -17,11 +17,11 @@
     ],
     "require": {
         "php": "^7.1",
-        "illuminate/support": ">= 7.0",
+        "illuminate/support": ">=7.0",
         "squizlabs/php_codesniffer": "*"
     },
     "require-dev": {
-        "orchestra/testbench": "^4.0",
+        "orchestra/testbench": "^5.0",
         "phpunit/phpunit": "^8.0"
     },
     "autoload": {
