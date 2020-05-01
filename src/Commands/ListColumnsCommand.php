@@ -4,7 +4,7 @@ namespace Ohseesoftware\LaravelSchemaList\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Database\ConnectionResolverInterface;
-use Illuminate\Database\MySqlConnection;
+use Ohseesoftware\LaravelSchemaList\Schemas\SchemaContract;
 
 class ListColumnsCommand extends Command
 {
@@ -14,20 +14,10 @@ class ListColumnsCommand extends Command
     /** @var string */
     protected $description = 'Lists the columns in the given table.';
 
-    public function handle(ConnectionResolverInterface $connections)
+    public function handle(ConnectionResolverInterface $connections, SchemaContract $schema)
     {
-        $connection = $connections->connection();
-
         $headers = ['Field', 'Type', 'Nullable', 'Key', 'Default Value', 'Extra'];
-        $rows = [];
-
-        if ($connection instanceof MySqlConnection) {
-            $output = $connection->select("DESCRIBE {$this->argument('table')}");
-
-            $rows = collect($output)->map(function ($value) {
-                return array_values((array) $value);
-            })->toArray();
-        }
+        $rows = $schema->getColumns($connections->connection(), $this->argument('table'));
 
         $this->table($headers, $rows);
     }

@@ -4,8 +4,7 @@ namespace Ohseesoftware\LaravelSchemaList\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Database\ConnectionResolverInterface;
-use Illuminate\Database\MySqlConnection;
-use Illuminate\Support\Facades\DB;
+use Ohseesoftware\LaravelSchemaList\Schemas\SchemaContract;
 
 class ListTablesCommand extends Command
 {
@@ -15,20 +14,10 @@ class ListTablesCommand extends Command
     /** @var string */
     protected $description = 'Lists the tables in the default database.';
 
-    public function handle(ConnectionResolverInterface $connections)
+    public function handle(ConnectionResolverInterface $connections, SchemaContract $schema)
     {
-        $connection = $connections->connection();
-
         $headers = ['Tables'];
-        $rows = [];
-
-        if ($connection instanceof MySqlConnection) {
-            $output = $connection->select(DB::raw('SHOW TABLES'));
-
-            $rows = collect($output)->values()->map(function ($value) {
-                return array_values((array)$value);
-            })->toArray();
-        }
+        $rows = $schema->getTables($connections->connection());
 
         $this->table($headers, $rows);
     }
