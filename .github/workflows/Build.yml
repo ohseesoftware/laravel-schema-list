@@ -1,37 +1,37 @@
 name: Build
 on: [push]
 jobs:
-  test:
-    name: Test
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v1
-      - name: Composer Install
-        run: composer install
-      - name: PHPCS
-        run: ./vendor/bin/phpcs src tests
-      - name: Run Tests
-        run: ./vendor/bin/phpunit
-      - name: Coveralls
+    test:
+        name: Test
+        runs-on: ubuntu-18.04
+        steps:
+            - uses: actions/checkout@v1
+            - name: Composer Install
+              run: composer install
+            - name: PHPCS
+              run: ./vendor/bin/phpcs src
+            - name: Run Tests
+              run: ./vendor/bin/phpunit
+            - name: Coveralls
+              if: github.ref == 'refs/heads/master'
+              run: ./vendor/bin/php-coveralls -v --coverage_clover build/coverage.xml --json_path build/coveralls-upload.json
+              env:
+                  COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+    release:
+        name: Release
         if: github.ref == 'refs/heads/master'
-        run: ./vendor/bin/php-coveralls -v --coverage_clover build/coverage.xml --json_path build/coveralls-upload.json
-        env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
-  release:
-    name: Release
-    if: github.ref == 'refs/heads/master'
-    needs: test
-    runs-on: ubuntu-18.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-      - name: Setup Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - name: Install dependencies
-        run: yarn install
-      - name: Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx semantic-release@15
+        needs: test
+        runs-on: ubuntu-18.04
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v1
+            - name: Setup Node.js
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 12
+            - name: Install dependencies
+              run: yarn install
+            - name: Release
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: npx semantic-release@15
