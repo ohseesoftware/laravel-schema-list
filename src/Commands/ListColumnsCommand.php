@@ -14,10 +14,10 @@ class ListColumnsCommand extends Command
     /** @var string */
     protected $description = 'Lists the columns in the given table.';
 
-    public function handle(ConnectionResolverInterface $connections, SchemaContract $schema)
+    public function handle(SchemaContract $schema)
     {
         $headers = ['Field', 'Type', 'Nullable', 'Key', 'Default Value', 'Extra'];
-        $rows = $schema->getColumns($connections->connection(), $this->argument('table'));
+        $rows = $schema->getColumns($this->argument('table'));
 
         $this->table($headers, $rows);
     }

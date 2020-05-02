@@ -5,23 +5,23 @@ namespace OhSeeSoftware\LaravelSchemaList\Schemas;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Support\Facades\DB;
 
-class MySQLSchema implements SchemaContract
+class MySQLSchema extends Schema
 {
-    public function getTables(ConnectionInterface $connection): array
+    public function getTables(): array
     {
-        $output = $connection->select(DB::raw('SHOW TABLES'));
+        $output = $this->connection->select(DB::raw('SHOW TABLES'));
 
-        return collect($output)->values()->map(function ($value) {
-            return array_values((array)$value);
-        })->toArray();
+        return array_map(function ($value) {
+            return array_values((array) $value);
+        }, $output);
     }
 
-    public function getColumns(ConnectionInterface $connection, string $table): array
+    public function getColumns(string $table): array
     {
-        $output = $connection->select("DESCRIBE {$table}");
+        $output = $this->connection->select("DESCRIBE {$table}");
 
-        return collect($output)->map(function ($value) {
+        return array_map(function ($value) {
             return array_values((array) $value);
-        })->toArray();
+        }, $output);
     }
 }

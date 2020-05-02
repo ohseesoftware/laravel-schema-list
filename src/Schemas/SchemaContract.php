@@ -2,11 +2,9 @@
 
 namespace OhSeeSoftware\LaravelSchemaList\Schemas;
 
-use Illuminate\Database\ConnectionInterface;
-
 interface SchemaContract
 {
-    public function getTables(ConnectionInterface $connection): array;
+    public function getTables(): array;
 
-    public function getColumns(ConnectionInterface $connection, string $table): array;
+    public function getColumns(string $table): array;
 }
