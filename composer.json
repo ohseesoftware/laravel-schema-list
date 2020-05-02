@@ -17,12 +17,12 @@
     "require": {
         "php": "^7.1",
         "illuminate/console": ">=7.0",
-        "illuminate/database": ">=7.0",
-        "squizlabs/php_codesniffer": "*"
+        "illuminate/database": ">=7.0"
     },
     "require-dev": {
         "orchestra/testbench": "^5.0",
-        "phpunit/phpunit": "^8.0"
+        "phpunit/phpunit": "^8.0",
+        "squizlabs/php_codesniffer": "*"
     },
     "autoload": {
         "psr-4": {
