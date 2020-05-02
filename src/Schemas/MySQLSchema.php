@@ -11,17 +11,17 @@ class MySQLSchema extends Schema
     {
         $output = $this->connection->select(DB::raw('SHOW TABLES'));
 
-        return collect($output)->values()->map(function ($value) {
-            return array_values((array)$value);
-        })->toArray();
+        return array_map(function ($value) {
+            return array_values((array) $value);
+        }, $output);
     }
 
     public function getColumns(string $table): array
     {
         $output = $this->connection->select("DESCRIBE {$table}");
 
-        return collect($output)->map(function ($value) {
+        return array_map(function ($value) {
             return array_values((array) $value);
-        })->toArray();
+        }, $output);
     }
 }
