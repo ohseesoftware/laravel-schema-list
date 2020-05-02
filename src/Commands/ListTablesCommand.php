@@ -23,6 +23,7 @@ class ListTablesCommand extends Command
             ->map(function ($row) use ($connections, $schema) {
                 return array_merge($row, [count($schema->getColumns($connections->connection(), $row[0]))]);
             })->toArray();
+
         $this->table($headers, $rows);
     }
 }

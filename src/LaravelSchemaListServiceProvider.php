@@ -15,6 +15,11 @@ use OhSeeSoftware\LaravelSchemaList\Schemas\SchemaContract;
 
 class LaravelSchemaListServiceProvider extends ServiceProvider
 {
+    private $connections = [
+        MySqlConnection::class    => MySQLSchema::class,
+        PostgresConnection::class => PostgresSchema::class,
+    ];
+
     /**
      * Bootstrap the application services.
      */
@@ -26,17 +31,15 @@ class LaravelSchemaListServiceProvider extends ServiceProvider
 
             $this->commands([
                 'schema.list:tables',
-                'schema.list:columns'
+                'schema.list:columns',
             ]);
 
             $this->app->bind(SchemaContract::class, function () {
                 $connection = resolve(ConnectionInterface::class);
-                if ($connection instanceof MySqlConnection) {
-                    return new MySQLSchema;
-                } elseif ($connection instanceof PostgresConnection) {
-                    return new PostgresSchema;
-                }
 
+                if (in_array($connectionType = get_class($connection), array_keys($this->connections))) {
+                    return new $this->connections[$connectionType];
+                }
                 throw new Exception('Connection type is not supported!');
             });
         }
