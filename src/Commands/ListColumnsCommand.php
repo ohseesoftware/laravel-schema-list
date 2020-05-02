@@ -3,7 +3,6 @@
 namespace OhSeeSoftware\LaravelSchemaList\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Database\ConnectionResolverInterface;
 use OhSeeSoftware\LaravelSchemaList\Schemas\SchemaContract;
 
 class ListColumnsCommand extends Command
