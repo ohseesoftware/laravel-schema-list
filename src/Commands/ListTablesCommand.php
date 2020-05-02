@@ -15,8 +15,13 @@ class ListTablesCommand extends Command
 
     public function handle(SchemaContract $schema)
     {
-        $headers = ['Tables'];
+        $headers = ['Tables', 'Columns'];
         $rows = $schema->getTables();
+
+        $rows = collect($rows)
+            ->map(function ($row) use ($schema) {
+                return array_merge($row, [count($schema->getColumns($row[0]))]);
+            })->toArray();
 
         $this->table($headers, $rows);
     }

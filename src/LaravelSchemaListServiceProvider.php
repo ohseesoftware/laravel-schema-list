@@ -16,6 +16,11 @@ use OhSeeSoftware\LaravelSchemaList\Schemas\UnsupportedSchema;
 
 class LaravelSchemaListServiceProvider extends ServiceProvider
 {
+    private $connections = [
+        MySqlConnection::class    => MySQLSchema::class,
+        PostgresConnection::class => PostgresSchema::class,
+    ];
+
     /**
      * Bootstrap the application services.
      */
@@ -29,14 +34,10 @@ class LaravelSchemaListServiceProvider extends ServiceProvider
 
             $this->app->bind(SchemaContract::class, function () {
                 $connection = resolve(ConnectionInterface::class);
-
-                if ($connection instanceof MySqlConnection) {
-                    return new MySQLSchema($connection);
-                } elseif ($connection instanceof PostgresConnection) {
-                    return new PostgresSchema($connection);
-                }
-
-                return new UnsupportedSchema($connection);
+                $connectionClass = get_class($connection);
+                $schema = $this->connections[$connectionClass] ?? UnsupportedSchema::class;
+                
+                return new $schema($connection);
             });
         }
     }
