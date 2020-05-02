@@ -4,7 +4,7 @@ namespace OhSeeSoftware\LaravelSchemaList\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
-use OhSeeSoftware\LaravelSchemaList\Schemas\SchemaContract;
+use OhSeeSoftware\LaravelSchemaList\Schemas\Schema;
 
 class ListTablesCommand extends Command
 {
@@ -14,7 +14,7 @@ class ListTablesCommand extends Command
     /** @var string */
     protected $description = 'Lists the tables in the default database.';
 
-    public function handle(SchemaContract $schema)
+    public function handle(Schema $schema)
     {
         $headers = ['Tables', 'Columns', 'Rows'];
         $rows = $schema->getTables();
