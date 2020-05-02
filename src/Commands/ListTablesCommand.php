@@ -16,9 +16,13 @@ class ListTablesCommand extends Command
 
     public function handle(ConnectionResolverInterface $connections, SchemaContract $schema)
     {
-        $headers = ['Tables'];
+        $headers = ['Tables', 'Columns'];
         $rows = $schema->getTables($connections->connection());
 
+        $rows = collect($rows)
+            ->map(function ($row) use ($connections, $schema) {
+                return array_merge($row, [count($schema->getColumns($connections->connection(), $row[0]))]);
+            })->toArray();
         $this->table($headers, $rows);
     }
 }

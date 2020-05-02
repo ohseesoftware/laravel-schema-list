@@ -16,7 +16,7 @@ class ListColumnsCommand extends Command
 
     public function handle(ConnectionResolverInterface $connections, SchemaContract $schema)
     {
-        $headers = ['Field', 'Type', 'Nullable', 'Key', 'Default Value', 'Extra'];
+        $headers = ['Field', 'Type', 'Nullable', 'Key', 'Default Value', 'Extra', 'Comment'];
         $rows = $schema->getColumns($connections->connection(), $this->argument('table'));
 
         $this->table($headers, $rows);
