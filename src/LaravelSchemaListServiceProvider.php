@@ -12,6 +12,7 @@ use OhSeeSoftware\LaravelSchemaList\Commands\ListTablesCommand;
 use OhSeeSoftware\LaravelSchemaList\Schemas\MySQLSchema;
 use OhSeeSoftware\LaravelSchemaList\Schemas\PostgresSchema;
 use OhSeeSoftware\LaravelSchemaList\Schemas\SchemaContract;
+use OhSeeSoftware\LaravelSchemaList\Schemas\UnsupportedSchema;
 
 class LaravelSchemaListServiceProvider extends ServiceProvider
 {
@@ -21,12 +22,9 @@ class LaravelSchemaListServiceProvider extends ServiceProvider
     public function boot()
     {
         if ($this->app->runningInConsole()) {
-            $this->app->bind('schema.list:tables', ListTablesCommand::class);
-            $this->app->bind('schema.list:columns', ListColumnsCommand::class);
-
             $this->commands([
-                'schema.list:tables',
-                'schema.list:columns'
+                ListTablesCommand::class,
+                ListColumnsCommand::class
             ]);
 
             $this->app->bind(SchemaContract::class, function () {
@@ -38,7 +36,7 @@ class LaravelSchemaListServiceProvider extends ServiceProvider
                     return new PostgresSchema($connection);
                 }
 
-                throw new Exception('Connection type is not supported!');
+                return new UnsupportedSchema($connection);
             });
         }
     }

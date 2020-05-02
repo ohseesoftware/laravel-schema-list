@@ -3,7 +3,6 @@
 namespace OhSeeSoftware\LaravelSchemaList\Schemas;
 
 use Illuminate\Database\ConnectionInterface;
-use Illuminate\Support\Facades\DB;
 use LogicException;
 
 abstract class Schema implements SchemaContract
@@ -18,11 +17,11 @@ abstract class Schema implements SchemaContract
 
     public function getTables(): array
     {
-        throw new LogicException('This database driver does not support getting all tables.');
+        throw new LogicException('This database driver does not support listing schema tables.');
     }
 
     public function getColumns(string $table): array
     {
-        throw new LogicException('This database driver does not support getting columns of table.');
+        throw new LogicException('This database driver does not support listing columns of a table.');
     }
 }
