@@ -1,15 +1,15 @@
 <?php
 
-namespace Ohseesoftware\LaravelSchemaList;
+namespace OhSeeSoftware\LaravelSchemaList;
 
 use Exception;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\MySqlConnection;
 use Illuminate\Support\ServiceProvider;
-use Ohseesoftware\LaravelSchemaList\Commands\ListColumnsCommand;
-use Ohseesoftware\LaravelSchemaList\Commands\ListTablesCommand;
-use Ohseesoftware\LaravelSchemaList\Schemas\MySQLSchema;
-use Ohseesoftware\LaravelSchemaList\Schemas\SchemaContract;
+use OhSeeSoftware\LaravelSchemaList\Commands\ListColumnsCommand;
+use OhSeeSoftware\LaravelSchemaList\Commands\ListTablesCommand;
+use OhSeeSoftware\LaravelSchemaList\Schemas\MySQLSchema;
+use OhSeeSoftware\LaravelSchemaList\Schemas\SchemaContract;
 
 class LaravelSchemaListServiceProvider extends ServiceProvider
 {

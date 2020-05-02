@@ -11,8 +11,7 @@
     "authors": [
         {
             "name": "Owen Conti",
-            "email": "owen@ohseemedia.com",
-            "role": "Developer"
+            "email": "owen@ohseemedia.com"
         }
     ],
     "require": {
@@ -26,12 +25,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Ohseesoftware\\LaravelSchemaList\\": "src"
+            "OhSeeSoftware\\LaravelSchemaList\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Ohseesoftware\\LaravelSchemaList\\Tests\\": "tests"
+            "OhSeeSoftware\\LaravelSchemaList\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -44,11 +43,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Ohseesoftware\\LaravelSchemaList\\LaravelSchemaListServiceProvider"
-            ],
-            "aliases": {
-                "LaravelSchemaList": "Ohseesoftware\\LaravelSchemaList\\LaravelSchemaListFacade"
-            }
+                "OhSeeSoftware\\LaravelSchemaList\\LaravelSchemaListServiceProvider"
+            ]
         }
     }
 }

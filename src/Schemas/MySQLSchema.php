@@ -1,6 +1,6 @@
 <?php
 
-namespace Ohseesoftware\LaravelSchemaList\Schemas;
+namespace OhSeeSoftware\LaravelSchemaList\Schemas;
 
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Support\Facades\DB;

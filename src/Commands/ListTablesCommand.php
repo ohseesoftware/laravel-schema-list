@@ -1,10 +1,10 @@
 <?php
 
-namespace Ohseesoftware\LaravelSchemaList\Commands;
+namespace OhSeeSoftware\LaravelSchemaList\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Database\ConnectionResolverInterface;
-use Ohseesoftware\LaravelSchemaList\Schemas\SchemaContract;
+use OhSeeSoftware\LaravelSchemaList\Schemas\SchemaContract;
 
 class ListTablesCommand extends Command
 {
