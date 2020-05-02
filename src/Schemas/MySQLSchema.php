@@ -2,7 +2,6 @@
 
 namespace OhSeeSoftware\LaravelSchemaList\Schemas;
 
-use Illuminate\Database\ConnectionInterface;
 use Illuminate\Support\Facades\DB;
 
 class MySQLSchema extends Schema
