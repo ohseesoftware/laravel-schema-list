@@ -29,8 +29,9 @@ class LaravelSchemaListServiceProvider extends ServiceProvider
 
             $this->app->bind(SchemaContract::class, function () {
                 $connection = resolve(ConnectionInterface::class);
+
                 if ($connection instanceof MySqlConnection) {
-                    return new MySQLSchema;
+                    return new MySQLSchema($connection);
                 }
                 
                 throw new Exception('Connection type is not supported!');
