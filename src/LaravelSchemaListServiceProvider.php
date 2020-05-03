@@ -2,7 +2,6 @@
 
 namespace OhSeeSoftware\LaravelSchemaList;
 
-use Exception;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\MySqlConnection;
 use Illuminate\Database\PostgresConnection;
@@ -11,7 +10,7 @@ use OhSeeSoftware\LaravelSchemaList\Commands\ListColumnsCommand;
 use OhSeeSoftware\LaravelSchemaList\Commands\ListTablesCommand;
 use OhSeeSoftware\LaravelSchemaList\Schemas\MySQLSchema;
 use OhSeeSoftware\LaravelSchemaList\Schemas\PostgresSchema;
-use OhSeeSoftware\LaravelSchemaList\Schemas\SchemaContract;
+use OhSeeSoftware\LaravelSchemaList\Schemas\Schema;
 use OhSeeSoftware\LaravelSchemaList\Schemas\UnsupportedSchema;
 
 class LaravelSchemaListServiceProvider extends ServiceProvider
@@ -29,14 +28,14 @@ class LaravelSchemaListServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 ListTablesCommand::class,
-                ListColumnsCommand::class
+                ListColumnsCommand::class,
             ]);
 
-            $this->app->bind(SchemaContract::class, function () {
+            $this->app->bind(Schema::class, function () {
                 $connection = resolve(ConnectionInterface::class);
                 $connectionClass = get_class($connection);
                 $schema = $this->connections[$connectionClass] ?? UnsupportedSchema::class;
-                
+
                 return new $schema($connection);
             });
         }
