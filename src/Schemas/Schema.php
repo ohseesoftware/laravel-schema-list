@@ -5,7 +5,7 @@ namespace OhSeeSoftware\LaravelSchemaList\Schemas;
 use Illuminate\Database\ConnectionInterface;
 use LogicException;
 
-abstract class Schema implements SchemaContract
+abstract class Schema
 {
     /** @var \Illuminate\Database\ConnectionInterface */
     protected $connection;
